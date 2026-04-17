@@ -60,6 +60,7 @@ static uint8_t supported_services(const void *cmd, uint16_t cmd_len,
 	tester_set_bit(rp->data, BTP_SERVICE_ID_CORE);
 	tester_set_bit(rp->data, BTP_SERVICE_ID_GAP);
 	tester_set_bit(rp->data, BTP_SERVICE_ID_GATT);
+	tester_set_bit(rp->data, BTP_SERVICE_ID_GATTC);
 #if defined(CONFIG_BT_L2CAP_DYNAMIC_CHANNEL)
 	tester_set_bit(rp->data, BTP_SERVICE_ID_L2CAP);
 #endif /* CONFIG_BT_L2CAP_DYNAMIC_CHANNEL */
@@ -172,6 +173,9 @@ static uint8_t register_service(const void *cmd, uint16_t cmd_len,
 		break;
 	case BTP_SERVICE_ID_GATT:
 		status = tester_init_gatt();
+		break;
+	case BTP_SERVICE_ID_GATTC:
+		status = tester_init_gatt_cl();
 		break;
 #if defined(CONFIG_BT_L2CAP_DYNAMIC_CHANNEL)
 	case BTP_SERVICE_ID_L2CAP:
@@ -341,6 +345,9 @@ static uint8_t unregister_service(const void *cmd, uint16_t cmd_len,
 	case BTP_SERVICE_ID_GATT:
 		status = tester_unregister_gatt();
 		break;
+	case BTP_SERVICE_ID_GATTC:
+		status = tester_unregister_gatt_cl();
+		break;
 #if defined(CONFIG_BT_L2CAP_DYNAMIC_CHANNEL)
 	case BTP_SERVICE_ID_L2CAP:
 		status = tester_unregister_l2cap();
@@ -480,7 +487,7 @@ static uint8_t unregister_service(const void *cmd, uint16_t cmd_len,
 		atomic_clear_bit(registered_services, cp->id);
 	}
 
-	return BTP_STATUS_FAILED;
+	return status;
 }
 
 static const struct btp_handler handlers[] = {

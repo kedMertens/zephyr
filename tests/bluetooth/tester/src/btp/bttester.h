@@ -59,6 +59,8 @@ uint16_t tester_supported_commands(uint8_t service, uint8_t *cmds);
 
 uint8_t tester_init_gatt(void);
 uint8_t tester_unregister_gatt(void);
+uint8_t tester_init_gatt_cl(void);
+uint8_t tester_unregister_gatt_cl(void);
 
 uint8_t tester_init_l2cap(void);
 uint8_t tester_unregister_l2cap(void);

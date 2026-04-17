@@ -15,6 +15,13 @@ config BTTESTER_BTP_CMD_THREAD_STACK_SIZE
 	help
 	  Stack size in byte used by the BTP CMD thread.
 
+config BTTESTER_GATTC_FORCE_EATT_READ_MULT_VAR
+	bool "Force GATTC Read Multiple Variable over EATT only"
+	depends on BT_EATT
+	help
+	  Force BTP GATTC READ_MULTIPLE_VAR to use enhanced ATT bearers only.
+	  Intended for PTS flows that explicitly require EATT bearers.
+
 endmenu
 
 source "Kconfig.zephyr"

@@ -16,6 +16,7 @@ target_sources(app PRIVATE
     src/btp_core.c
     src/btp_gap.c
     src/btp_gatt.c
+    src/btp_gatt_cl.c
     )
 if(CONFIG_BT_L2CAP_DYNAMIC_CHANNEL)
 target_sources(app PRIVATE src/btp_l2cap.c)
